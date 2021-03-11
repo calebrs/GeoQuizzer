@@ -4,5 +4,11 @@
   height: 100%;
   top:0px;
   left:0px;
-  z-index:1000;
+  z-index: -1000;
+}
+
+h1 {
+  font-size: 50px;
+  max-width: 500px;
+  margin: auto;
 }

@@ -12,7 +12,15 @@ app.use(morgan("common"));
 app.use(express.static("public"));
 
 app.get('/', (req, res) => {
+  res.redirect('/GeoQuizzer');
+});
+
+app.get('/GeoQuizzer', (req, res) => {
   res.render('map');
+});
+
+app.get('/GeoQuizzer/:countryName', (req, res) => {
+  res.render('quiz');
 });
 
 app.listen(port, host, () => {

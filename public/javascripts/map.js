@@ -1,36 +1,33 @@
+const Http = new XMLHttpRequest();
+const url = `http://localhost:3000/GeoQuizzer/`;
+
 let worldMap = L.map('worldmap').setView([20, 0], 3);
 
-let canadaPoint = {
-  "type": "Feature",
+let countryPoints = { "type": "FeatureCollection","features":[
+  {"type": "Feature",
   "properties": {
       "name": "Canada",
   },
   "geometry": {
       "type": "Point",
       "coordinates": [-98.307, 61.362]
-  }
-};
-
-let southAfricaPoint = {
-  "type": "Feature",
+  }},
+  {"type": "Feature",
   "properties": {
       "name": "South Africa",
   },
   "geometry": {
       "type": "Point",
       "coordinates": [25.083, -29]
-  }
-};
-
-let mongoliaPoint = {
-  "type": "Feature",
+  }},
+  {"type": "Feature",
   "properties": {
       "name": "Mongolia",
   },
   "geometry": {
       "type": "Point",
       "coordinates": [103.052, 46.826]
-  }
+  }}]
 };
 
 // let CartoDB_DarkMatterNoLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
@@ -55,6 +52,20 @@ let CartoDB_VoyagerNoLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/ras
 // });
 
 CartoDB_VoyagerNoLabels.addTo(worldMap);
-L.geoJSON(canadaPoint).addTo(worldMap);
-L.geoJSON(southAfricaPoint).addTo(worldMap);
-L.geoJSON(mongoliaPoint).addTo(worldMap);
+L.geoJSON(countryPoints).addTo(worldMap);
+
+function goToQuiz(e) {
+  Http.open("GET", url + e.target.feature.properties.name);
+  Http.send();
+  return Http.responseText;
+}
+
+function onEachFeature(feature, layer) {
+  layer.on({
+    click: goToQuiz,
+  });
+}
+
+let geojson = L.geoJSON(countryPoints, {
+  onEachFeature: onEachFeature,
+}).addTo(worldMap);
