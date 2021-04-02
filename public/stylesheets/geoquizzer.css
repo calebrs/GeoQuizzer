@@ -7,8 +7,44 @@
   z-index: -1000;
 }
 
+h1, h2 {
+  text-align: center;
+}
+
 h1 {
-  font-size: 50px;
-  max-width: 500px;
-  margin: auto;
+  padding: 20px;
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 36px;
+  padding: 20px;
+}
+
+#quizzes {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  max-width: 960px;
+  justify-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
+#quizzes li {
+  box-sizing: border-box;
+  margin: 0 auto;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+#quizzes li:hover {
+  border: 2px solid red;
+}
+
+#quizzes img {
+  width: auto;
+  height: 300px;
+  
 }

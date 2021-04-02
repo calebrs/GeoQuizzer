@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const quizzes = require("./lib/quizzes")
 
 const app = express();
 const host = "localhost";
@@ -16,11 +17,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/GeoQuizzer', (req, res) => {
-  res.render('map');
+  res.render('quizzes', {
+    quizzes: quizzes,
+  });
 });
 
 app.get('/GeoQuizzer/:countryName', (req, res) => {
-  res.render('quiz');
+  
 });
 
 app.listen(port, host, () => {

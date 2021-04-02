@@ -1,0 +1,10 @@
+extends layout
+
+block main
+  h2 Select a country to be quizzed on!
+
+  ul#quizzes
+    each quiz in quizzes
+      li
+        a(href=`/quizzes/${quiz.id}`)
+          img(src=`${quiz.shapeImage}`, alt=`${quiz.id} country shape`)
