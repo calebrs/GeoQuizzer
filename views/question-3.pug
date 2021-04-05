@@ -1,0 +1,12 @@
+extends layout
+
+block main
+  div#question3
+    h2 Question #3
+    figure
+      img(src=`${quiz.shapeImage}`, alt="")
+    h3 What is the capitol of this country?
+
+    form(action=`/GeoQuizzer/${quiz.id}/question3` method="post") 
+      input(type="text" placeholder="Write answer here")
+      button(type="submit") Submit Answer

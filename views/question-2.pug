@@ -1,0 +1,12 @@
+extends layout
+
+block main
+  div#question2
+    h2 Question #2
+    figure
+      img(src=`${quiz.shapeImage}`, alt="")
+    h3 Which flag belongs to this country?
+
+    form(action=`/GeoQuizzer/${quiz.id}/question2` method="post") 
+      input(type="text" placeholder="Write answer here")
+      button(type="submit") Submit Answer

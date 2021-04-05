@@ -6,5 +6,5 @@ block main
   ul#quizzes
     each quiz in quizzes
       li
-        a(href=`/quizzes/${quiz.id}`)
+        a(href=`/GeoQuizzer/${quiz.id}/question1`)
           img(src=`${quiz.shapeImage}`, alt=`${quiz.id} country shape`)

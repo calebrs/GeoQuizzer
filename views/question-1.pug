@@ -1,0 +1,12 @@
+extends layout
+
+block main
+  div#question1
+    h2 Question #1
+    figure
+      img(src=`${quiz.shapeImage}`, alt="")
+    h3 What is the name of this country?
+
+    form(action=`/GeoQuizzer/${quiz.id}/question1` method="post") 
+      input(type="text" placeholder="Write answer here")
+      button(type="submit") Submit Answer
