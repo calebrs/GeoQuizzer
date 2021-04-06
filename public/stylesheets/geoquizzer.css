@@ -77,9 +77,9 @@ h2 {
   align-items: center;
 }
 
-#question1 img,
-#question2 img,
-#question3 img {
+#question1 figure > img,
+#question2 figure > img,
+#question3 figure > img {
   height: 400px;
 }
 
@@ -90,9 +90,7 @@ h2 {
   font-size: 36px;
 }
 
-#question1 input,
-#question2 input,
-#question3 input {
+#question1 input {
   box-sizing: border-box;
   width: 500px;
   padding: 0 8px;
@@ -100,9 +98,20 @@ h2 {
   margin: 0 auto;
 }
 
+label {
+  cursor: pointer;
+  display: block;
+  padding: 10px;
+}
+
+input[type="radio"] {
+  margin: 0 10px;
+}
+
 #question1 button,
 #question2 button,
 #question3 button {
   box-sizing: border-box;
   height: 30px;
+  margin: 10px;
 }

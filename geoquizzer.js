@@ -5,6 +5,24 @@ const quizzes = require("./lib/quizzes")
 const app = express();
 const host = "localhost";
 const port = 3000;
+const CAPITOL_NAMES = ['Ottawa', 'Ulaanbaatar', 'Lima', 'Cape Town', 'Quito', 
+                       'Oslo', 'Moscow', 'Dublin', 'Hanoi', 'Minsk', 
+                       'Canberra', 'Brussels', 'Kabul', 'Bogota', 'Manila'];
+const FLAG_REFS = ['https://flagpedia.net/data/flags/w580/ca.png',
+                   'https://flagpedia.net/data/flags/w580/mn.png',
+                   'https://flagpedia.net/data/flags/w580/za.png',
+                   'https://flagpedia.net/data/flags/w580/pe.png',
+                   'https://flagpedia.net/data/flags/w580/co.png',
+                   'https://flagpedia.net/data/flags/w580/ro.png',
+                   'https://flagpedia.net/data/flags/w580/eg.png',
+                   'https://flagpedia.net/data/flags/w580/fi.png',
+                   'https://flagpedia.net/data/flags/w580/sd.png',
+                   'https://flagpedia.net/data/flags/w580/sr.png',
+                   'https://flagpedia.net/data/flags/w580/ie.png',
+                   'https://flagpedia.net/data/flags/w580/kw.png',
+                   'https://flagpedia.net/data/flags/w580/cu.png',
+                   'https://flagpedia.net/data/flags/w580/jo.png',
+                   'https://flagpedia.net/data/flags/w580/bs.png'];
 
 app.set("views", "./views");
 app.set("view engine", "pug");
@@ -18,6 +36,27 @@ function getQuiz(quizzes, quizId) {
     if (quizId === quiz['id'])
     return quiz;
   }
+}
+
+function getAnswerOptions(array, existingName) {
+  let options = [existingName];
+
+  while (options.length <= 3) {
+    let randomIndex = Math.floor(Math.random() * array.length);
+    if (!options.includes(array[randomIndex])) {
+      options.push(array[randomIndex]);
+    }
+  }
+
+  return shuffle(options);
+}
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 app.get('/', (req, res) => {
@@ -42,8 +81,11 @@ app.post('/GeoQuizzer/:countryID/question1', (req, res) => {
 });
 
 app.get('/GeoQuizzer/:countryID/question2', (req, res) => {
+  let quiz = getQuiz(quizzes, req.params.countryID);
+
   res.render('question-2', {
-    quiz: getQuiz(quizzes, req.params.countryID)
+    quiz: quiz,
+    answers: getAnswerOptions(FLAG_REFS, quiz.flag),
   });
 });
 
@@ -53,8 +95,11 @@ app.post('/GeoQuizzer/:countryID/question2', (req, res) => {
 });
 
 app.get('/GeoQuizzer/:countryID/question3', (req, res) => {
+  let quiz = getQuiz(quizzes, req.params.countryID);
+
   res.render('question-3', {
-    quiz: getQuiz(quizzes, req.params.countryID)
+    quiz: quiz,
+    answers: getAnswerOptions(CAPITOL_NAMES, quiz.capitol)
   });
 });
 

@@ -4,9 +4,13 @@ block main
   div#question2
     h2 Question #2
     figure
-      img(src=`${quiz.shapeImage}`, alt="")
+      img(src=`${quiz.shapeImage}`, alt="country shape")
     h3 Which flag belongs to this country?
 
-    form(action=`/GeoQuizzer/${quiz.id}/question2` method="post") 
-      input(type="text" placeholder="Write answer here")
-      button(type="submit") Submit Answer
+    form(action=`/GeoQuizzer/${quiz.id}/question2` method="post")
+      fieldset
+        each flag in answers
+          label
+            input(type="radio" name="flag" value=`${flag}`)
+            img(src=`${flag}` alt="country flag")
+        button(type="submit") Submit Answer

@@ -7,6 +7,11 @@ block main
       img(src=`${quiz.shapeImage}`, alt="")
     h3 What is the capitol of this country?
 
-    form(action=`/GeoQuizzer/${quiz.id}/question3` method="post") 
-      input(type="text" placeholder="Write answer here")
-      button(type="submit") Submit Answer
+    form(action=`/GeoQuizzer/${quiz.id}/question3` method="post")
+      fieldset
+        each capitol in answers
+          label
+            input(type="radio" name="flag" value=`${capitol}`)
+            =capitol
+            
+        button(type="submit") Submit Answer
